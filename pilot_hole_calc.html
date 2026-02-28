@@ -12,6 +12,7 @@
     --border: #2a3245;
     --accent: #00e5ff;
     --accent2: #ff6b35;
+    --accent3: #a8ff3e;
     --text: #c8d6e5;
     --dim: #5a6a80;
     --mono: 'Share Tech Mono', monospace;
@@ -28,17 +29,14 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 40px 16px;
-    background-image: 
+    padding: 40px 16px 60px;
+    background-image:
       linear-gradient(rgba(0,229,255,0.03) 1px, transparent 1px),
       linear-gradient(90deg, rgba(0,229,255,0.03) 1px, transparent 1px);
     background-size: 40px 40px;
   }
 
-  header {
-    text-align: center;
-    margin-bottom: 40px;
-  }
+  header { text-align: center; margin-bottom: 40px; }
 
   .title-tag {
     font-family: var(--mono);
@@ -75,9 +73,10 @@
     border-radius: 4px;
     padding: 32px;
     width: 100%;
-    max-width: 700px;
+    max-width: 720px;
     position: relative;
     overflow: hidden;
+    margin-bottom: 16px;
   }
 
   .card::before {
@@ -88,6 +87,8 @@
     background: linear-gradient(90deg, var(--accent), var(--accent2));
   }
 
+  .card.fdm-card::before { background: linear-gradient(90deg, var(--accent3), var(--accent)); }
+
   .section-label {
     font-family: var(--mono);
     font-size: 10px;
@@ -96,6 +97,8 @@
     text-transform: uppercase;
     margin-bottom: 16px;
   }
+
+  .section-label.green { color: var(--accent3); }
 
   .material-grid {
     display: grid;
@@ -117,19 +120,10 @@
     border-radius: 3px;
     cursor: pointer;
     transition: all 0.15s;
-    position: relative;
   }
 
-  .mat-btn:hover {
-    border-color: var(--accent);
-    color: var(--text);
-  }
-
-  .mat-btn.active {
-    border-color: var(--accent);
-    color: var(--accent);
-    background: rgba(0,229,255,0.07);
-  }
+  .mat-btn:hover { border-color: var(--accent); color: var(--text); }
+  .mat-btn.active { border-color: var(--accent); color: var(--accent); background: rgba(0,229,255,0.07); }
 
   .mat-btn .mat-temp {
     display: block;
@@ -150,6 +144,8 @@
     margin-bottom: 28px;
   }
 
+  @media (max-width: 520px) { .controls-row { grid-template-columns: 1fr; } }
+
   label {
     display: block;
     font-family: var(--mono);
@@ -160,11 +156,8 @@
     margin-bottom: 8px;
   }
 
-  select, input[type=range] {
+  select, input[type=number] {
     width: 100%;
-  }
-
-  select {
     background: var(--bg);
     border: 1px solid var(--border);
     color: var(--text);
@@ -173,6 +166,9 @@
     padding: 10px 12px;
     border-radius: 3px;
     cursor: pointer;
+  }
+
+  select {
     appearance: none;
     -webkit-appearance: none;
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%235a6a80' d='M6 8L0 0h12z'/%3E%3C/svg%3E");
@@ -180,12 +176,11 @@
     background-position: right 14px center;
   }
 
-  select:focus { outline: none; border-color: var(--accent); }
+  input[type=number] { appearance: textfield; -moz-appearance: textfield; }
+  input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; }
+  select:focus, input[type=number]:focus { outline: none; border-color: var(--accent); }
 
-  .unit-toggle {
-    display: flex;
-    gap: 4px;
-  }
+  .unit-toggle { display: flex; gap: 4px; }
 
   .unit-btn {
     flex: 1;
@@ -200,53 +195,189 @@
     transition: all 0.15s;
   }
 
-  .unit-btn.active {
-    background: rgba(0,229,255,0.1);
-    border-color: var(--accent);
+  .unit-btn.active { background: rgba(0,229,255,0.1); border-color: var(--accent); color: var(--accent); }
+
+  .slider-value {
+    font-family: var(--mono);
+    font-size: 15px;
     color: var(--accent);
   }
 
+  input[type=range] {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100%;
+    height: 4px;
+    background: var(--border);
+    border-radius: 2px;
+    outline: none;
+    cursor: pointer;
+    margin-top: 6px;
+  }
+
+  input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 16px; height: 16px;
+    border-radius: 50%;
+    background: var(--accent);
+    cursor: pointer;
+    box-shadow: 0 0 8px rgba(0,229,255,0.5);
+  }
+
+  input[type=range]::-moz-range-thumb {
+    width: 16px; height: 16px;
+    border-radius: 50%;
+    background: var(--accent);
+    cursor: pointer;
+    border: none;
+  }
+
+  .slider-labels {
+    display: flex;
+    justify-content: space-between;
+    font-family: var(--mono);
+    font-size: 9px;
+    color: var(--dim);
+    margin-top: 5px;
+  }
+
+  /* FDM */
+  .fdm-toggle-row {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 20px;
+  }
+
+  .toggle-switch { position: relative; width: 44px; height: 24px; flex-shrink: 0; }
+  .toggle-switch input { display: none; }
+
+  .toggle-track {
+    position: absolute;
+    inset: 0;
+    background: var(--border);
+    border-radius: 12px;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+
+  .toggle-thumb {
+    position: absolute;
+    top: 3px; left: 3px;
+    width: 18px; height: 18px;
+    background: var(--dim);
+    border-radius: 50%;
+    transition: transform 0.2s, background 0.2s;
+    pointer-events: none;
+  }
+
+  .toggle-switch input:checked + .toggle-track { background: rgba(168,255,62,0.15); border: 1px solid var(--accent3); }
+  .toggle-switch input:checked + .toggle-track + .toggle-thumb { transform: translateX(20px); background: var(--accent3); }
+
+  .toggle-label {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 2px;
+    color: var(--dim);
+    text-transform: uppercase;
+  }
+
+  .toggle-label.on { color: var(--accent3); }
+
+  .fdm-body { transition: opacity 0.2s; }
+  .fdm-body.hidden { opacity: 0.3; pointer-events: none; }
+
+  .fdm-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 12px;
+    align-items: end;
+    margin-bottom: 14px;
+  }
+
+  @media (max-width: 520px) { .fdm-row { grid-template-columns: 1fr 1fr; } }
+
+  .fdm-result-inline {
+    padding: 10px 12px;
+    background: var(--bg);
+    border: 1px solid rgba(168,255,62,0.3);
+    border-radius: 3px;
+    font-family: var(--mono);
+    font-size: 15px;
+    color: var(--accent3);
+  }
+
+  .fdm-result-inline .fdm-label {
+    font-size: 9px;
+    letter-spacing: 2px;
+    color: var(--dim);
+    display: block;
+    margin-bottom: 3px;
+    text-transform: uppercase;
+  }
+
+  .fdm-hint {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--dim);
+    letter-spacing: 1px;
+    line-height: 1.8;
+  }
+
+  .fdm-hint strong { color: var(--accent3); }
+
+  /* Results */
   .result-panel {
     background: var(--bg);
     border: 1px solid var(--border);
     border-radius: 3px;
     padding: 28px;
     margin-top: 8px;
-    position: relative;
   }
 
   .result-main {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 20px;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
     margin-bottom: 24px;
   }
 
-  .result-block {}
+  @media (max-width: 480px) { .result-main { grid-template-columns: 1fr 1fr; } }
 
-  .result-block .rl { 
-    font-family: var(--mono); 
-    font-size: 9px; 
-    letter-spacing: 3px; 
-    color: var(--dim); 
-    text-transform: uppercase; 
-    margin-bottom: 6px; 
+  .result-block .rl {
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: 3px;
+    color: var(--dim);
+    text-transform: uppercase;
+    margin-bottom: 6px;
   }
 
   .result-block .rv {
     font-family: var(--mono);
-    font-size: 2.4rem;
+    font-size: 1.95rem;
     color: #fff;
     line-height: 1;
   }
 
-  .result-block .rv span {
-    font-size: 1rem;
-    color: var(--accent);
-    margin-left: 4px;
-  }
-
+  .result-block .rv span { font-size: 0.85rem; color: var(--accent); margin-left: 3px; }
   .result-block.accent .rv { color: var(--accent); }
+  .result-block.green .rv { color: var(--accent3); }
+
+  .fdm-compensation-tag {
+    display: inline-block;
+    font-family: var(--mono);
+    font-size: 8px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    background: rgba(168,255,62,0.12);
+    color: var(--accent3);
+    border: 1px solid rgba(168,255,62,0.3);
+    border-radius: 2px;
+    padding: 1px 5px;
+    margin-left: 6px;
+    vertical-align: middle;
+  }
 
   .gauge-bar {
     height: 6px;
@@ -254,20 +385,20 @@
     border-radius: 3px;
     margin-bottom: 24px;
     overflow: hidden;
-    position: relative;
   }
 
   .gauge-fill {
     height: 100%;
     background: linear-gradient(90deg, var(--accent), var(--accent2));
     border-radius: 3px;
-    transition: width 0.3s ease;
+    transition: width 0.35s ease;
   }
 
   .stats-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 12px;
+    margin-bottom: 20px;
   }
 
   .stat-cell {
@@ -279,7 +410,7 @@
 
   .stat-cell .sv {
     font-family: var(--mono);
-    font-size: 1.1rem;
+    font-size: 1.05rem;
     color: var(--text);
     display: block;
   }
@@ -294,8 +425,64 @@
     display: block;
   }
 
+  .engagement-box {
+    border: 1px solid rgba(168,255,62,0.2);
+    border-radius: 3px;
+    padding: 16px 20px;
+    margin-bottom: 20px;
+    background: rgba(168,255,62,0.02);
+  }
+
+  .engagement-box .eb-label {
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: 3px;
+    color: var(--accent3);
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+
+  .engagement-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 10px;
+  }
+
+  .eng-cell { text-align: center; }
+
+  .eng-cell .ev {
+    font-family: var(--mono);
+    font-size: 1.2rem;
+    color: var(--accent3);
+    display: block;
+  }
+
+  .eng-cell .el {
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: 1px;
+    color: var(--dim);
+    text-transform: uppercase;
+    margin-top: 2px;
+    display: block;
+  }
+
+  .bar-mini {
+    height: 3px;
+    background: var(--border);
+    border-radius: 2px;
+    margin-top: 8px;
+    overflow: hidden;
+  }
+
+  .bar-mini-fill {
+    height: 100%;
+    background: var(--accent3);
+    border-radius: 2px;
+    transition: width 0.35s ease;
+  }
+
   .note-box {
-    margin-top: 20px;
     padding: 14px 16px;
     border-left: 2px solid var(--accent2);
     background: rgba(255,107,53,0.05);
@@ -306,52 +493,29 @@
 
   .note-box strong { color: var(--accent2); }
 
-  .screw-visual {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-bottom: 28px;
-  }
-
-  .screw-diagram {
-    position: relative;
-    width: 120px;
-    height: 60px;
-    flex-shrink: 0;
-  }
-
-  .screw-diagram svg { width: 100%; height: 100%; }
-
-  .dim-info {
-    flex: 1;
-    font-family: var(--mono);
-    font-size: 11px;
-    color: var(--dim);
-    line-height: 1.8;
-  }
-
-  .dim-info .hi { color: var(--accent); }
-
   footer {
-    margin-top: 32px;
+    margin-top: 16px;
     font-family: var(--mono);
     font-size: 10px;
     color: var(--dim);
-    letter-spacing: 2px;
+    letter-spacing: 1px;
     text-align: center;
+    max-width: 720px;
+    line-height: 2;
   }
 </style>
 </head>
 <body>
 
 <header>
-  <div class="title-tag">// tool v1.0</div>
+  <div class="title-tag">// tool v2.0</div>
   <h1>Pilot Hole<br><span>Calculator</span></h1>
-  <div class="subtitle">For Plastic Materials</div>
+  <div class="subtitle">Plastic Materials · FDM Compensation · Thread Engagement</div>
 </header>
 
+<!-- Card 1: Material + Screw + Engagement -->
 <div class="card">
-  <div class="section-label">01 // Select Material</div>
+  <div class="section-label">01 // Material</div>
   <div class="material-grid" id="matGrid">
     <button class="mat-btn active" data-mat="ABS">ABS<span class="mat-temp">~105°C HDT</span></button>
     <button class="mat-btn" data-mat="PLA">PLA<span class="mat-temp">~60°C HDT</span></button>
@@ -375,13 +539,69 @@
     </div>
   </div>
 
+  <div class="section-label">02 // Thread Engagement — <span class="slider-value" id="engPctDisplay">75%</span></div>
+  <input type="range" id="engSlider" min="50" max="100" value="75" step="5">
+  <div class="slider-labels">
+    <span>50% — light duty</span>
+    <span>75% — standard</span>
+    <span>100% — full depth</span>
+  </div>
+</div>
+
+<!-- Card 2: FDM Compensation -->
+<div class="card fdm-card">
+  <div class="section-label green">03 // FDM Hole Compensation</div>
+
+  <div class="fdm-toggle-row">
+    <label class="toggle-switch">
+      <input type="checkbox" id="fdmToggle">
+      <div class="toggle-track"></div>
+      <div class="toggle-thumb"></div>
+    </label>
+    <span class="toggle-label" id="fdmToggleLabel">Disabled — using nominal dimensions</span>
+  </div>
+
+  <div class="fdm-body hidden" id="fdmBody">
+    <p class="fdm-hint" style="margin-bottom:16px">
+      FDM holes print smaller than modelled (elephant's foot, layer adhesion, thermal shrink).<br>
+      Enter a known nominal → actual pair from your printer to calibrate a correction factor.
+    </p>
+    <div class="fdm-row">
+      <div>
+        <label>Nominal (CAD / modelled)</label>
+        <input type="number" id="fdmNominal" value="3.20" step="0.05" min="0.5" max="30">
+      </div>
+      <div>
+        <label>Actual (measured print)</label>
+        <input type="number" id="fdmActual" value="2.95" step="0.05" min="0.5" max="30">
+      </div>
+      <div>
+        <div class="fdm-result-inline">
+          <span class="fdm-label">Shrinkage factor</span>
+          <span id="fdmFactor">0.9219×</span>
+        </div>
+      </div>
+    </div>
+    <div class="fdm-hint">
+      The calculator scales up the target pilot so your printer produces the correct final size.<br>
+      e.g. target = 3.08 mm, factor = 0.922 → model at <strong id="fdmExample">3.34 mm</strong>
+    </div>
+  </div>
+</div>
+
+<!-- Card 3: Results -->
+<div class="card">
   <div class="result-panel">
-    <div class="section-label">02 // Recommended Pilot Hole</div>
+    <div class="section-label">04 // Results</div>
 
     <div class="result-main">
       <div class="result-block accent">
-        <div class="rl">Pilot Hole Ø</div>
+        <div class="rl">Target Pilot Ø</div>
         <div class="rv" id="pilotVal">—<span id="pilotUnit">mm</span></div>
+      </div>
+      <div class="result-block green" id="fdmBlock" style="opacity:0.3">
+        <div class="rl">Model at Ø <span class="fdm-compensation-tag">FDM</span></div>
+        <div class="rv" id="fdmAdjVal">—<span id="fdmAdjUnit">mm</span></div>
       </div>
       <div class="result-block">
         <div class="rl">Screw Major Ø</div>
@@ -394,7 +614,7 @@
     <div class="stats-grid">
       <div class="stat-cell">
         <span class="sv" id="minVal">—</span>
-        <span class="sl">Min Hole</span>
+        <span class="sl">Min Pilot</span>
       </div>
       <div class="stat-cell">
         <span class="sv" id="recVal">—</span>
@@ -402,7 +622,29 @@
       </div>
       <div class="stat-cell">
         <span class="sv" id="maxVal">—</span>
-        <span class="sl">Max / Clear</span>
+        <span class="sl">Max / Clearance</span>
+      </div>
+    </div>
+
+    <!-- Thread engagement -->
+    <div class="engagement-box">
+      <div class="eb-label">Thread Engagement Analysis</div>
+      <div class="engagement-row">
+        <div class="eng-cell">
+          <span class="ev" id="engDepth">—</span>
+          <span class="el">Thread depth</span>
+          <div class="bar-mini"><div class="bar-mini-fill" id="engBar1" style="width:0%"></div></div>
+        </div>
+        <div class="eng-cell">
+          <span class="ev" id="engMinLen">—</span>
+          <span class="el">Rec. engage. length</span>
+          <div class="bar-mini"><div class="bar-mini-fill" id="engBar2" style="width:60%"></div></div>
+        </div>
+        <div class="eng-cell">
+          <span class="ev" id="engStrength">—</span>
+          <span class="el">Strength rating</span>
+          <div class="bar-mini"><div class="bar-mini-fill" id="engBar3" style="width:0%"></div></div>
+        </div>
       </div>
     </div>
 
@@ -411,96 +653,162 @@
 </div>
 
 <footer>
-  Pilot hole = 85–95% of screw major diameter, adjusted per material hardness/brittleness
+  Target pilot Ø = major Ø × material factor × engagement correction &nbsp;·&nbsp;
+  FDM model Ø = target Ø ÷ shrinkage factor &nbsp;·&nbsp;
+  Engagement length ≥ 1× screw diameter (1.5× recommended for plastics)
 </footer>
 
 <script>
-// Screw data: metric M sizes + imperial #sizes
-// Each: { label, major_mm, pitch_mm }
 const SCREWS = [
-  // Metric
-  { label: 'M1.6', major: 1.6, pitch: 0.35 },
-  { label: 'M2',   major: 2.0, pitch: 0.40 },
-  { label: 'M2.5', major: 2.5, pitch: 0.45 },
-  { label: 'M3',   major: 3.0, pitch: 0.50 },
-  { label: 'M3.5', major: 3.5, pitch: 0.60 },
-  { label: 'M4',   major: 4.0, pitch: 0.70 },
-  { label: 'M5',   major: 5.0, pitch: 0.80 },
-  { label: 'M6',   major: 6.0, pitch: 1.00 },
-  { label: 'M8',   major: 8.0, pitch: 1.25 },
-  { label: 'M10',  major:10.0, pitch: 1.50 },
-  // Imperial (self-tapping style)
-  { label: '#2 (UNC)', major: 2.184, pitch: null },
-  { label: '#4 (UNC)', major: 2.845, pitch: null },
-  { label: '#6 (UNC)', major: 3.505, pitch: null },
-  { label: '#8 (UNC)', major: 4.166, pitch: null },
-  { label: '#10 (UNC)',major: 4.826, pitch: null },
-  { label: '#12 (UNC)',major: 5.486, pitch: null },
-  { label: '1/4" UNC', major: 6.350, pitch: null },
-  { label: '5/16" UNC',major: 7.938, pitch: null },
-  { label: '3/8" UNC', major: 9.525, pitch: null },
+  { label: 'M1.6', major: 1.6,  pitch: 0.35 },
+  { label: 'M2',   major: 2.0,  pitch: 0.40 },
+  { label: 'M2.5', major: 2.5,  pitch: 0.45 },
+  { label: 'M3',   major: 3.0,  pitch: 0.50 },
+  { label: 'M3.5', major: 3.5,  pitch: 0.60 },
+  { label: 'M4',   major: 4.0,  pitch: 0.70 },
+  { label: 'M5',   major: 5.0,  pitch: 0.80 },
+  { label: 'M6',   major: 6.0,  pitch: 1.00 },
+  { label: 'M8',   major: 8.0,  pitch: 1.25 },
+  { label: 'M10',  major:10.0,  pitch: 1.50 },
+  { label: '#2 (UNC)', major: 2.184, pitch: 0.794 },
+  { label: '#4 (UNC)', major: 2.845, pitch: 0.847 },
+  { label: '#6 (UNC)', major: 3.505, pitch: 0.907 },
+  { label: '#8 (UNC)', major: 4.166, pitch: 1.058 },
+  { label: '#10 (UNC)',major: 4.826, pitch: 1.058 },
+  { label: '#12 (UNC)',major: 5.486, pitch: 1.270 },
+  { label: '1/4" UNC', major: 6.350, pitch: 1.270 },
+  { label: '5/16" UNC',major: 7.938, pitch: 1.588 },
+  { label: '3/8" UNC', major: 9.525, pitch: 1.588 },
 ];
 
-// Material profiles: factor = pilot/major diameter ratio, brittleness note
 const MATERIALS = {
-  ABS:      { factor: 0.88, min: 0.84, max: 0.92, note: 'ABS is semi-rigid. Use ~88% of major diameter for good thread engagement without cracking. Drill slowly and clear chips frequently.' },
-  PLA:      { factor: 0.85, min: 0.82, max: 0.90, note: 'PLA is brittle. Use a slightly smaller pilot hole (85%) but avoid over-torquing — PLA cracks easily. Consider heat-set inserts for repeated assembly.' },
-  PETG:     { factor: 0.90, min: 0.86, max: 0.94, note: 'PETG is tougher and more flexible than PLA. A larger pilot (90%) helps prevent binding. Good for functional parts.' },
-  Nylon:    { factor: 0.93, min: 0.90, max: 0.97, note: 'Nylon is tough and flexible. Use a larger pilot hole (93%) — nylon compresses rather than shears, so tight holes can seize. Allow clearance for moisture expansion.' },
-  PC:       { factor: 0.87, min: 0.83, max: 0.91, note: 'Polycarbonate is strong but notch-sensitive. Stay at ~87% to prevent micro-cracking. Never exceed max torque, and pre-drill slowly.' },
-  Acrylic:  { factor: 0.83, min: 0.80, max: 0.88, note: 'Acrylic (PMMA) is very brittle. Use the smallest recommended pilot and drill at low speed. Consider step-drilling and use machine screws with pre-drilled clearance holes.' },
+  ABS:     { factor: 0.88, min: 0.84, max: 0.92, note: 'ABS is semi-rigid. Use ~88% of major diameter for good thread engagement without cracking. Drill slowly and clear chips frequently.' },
+  PLA:     { factor: 0.85, min: 0.82, max: 0.90, note: 'PLA is brittle. Use a slightly smaller pilot hole (85%) but avoid over-torquing — PLA cracks easily. Consider heat-set inserts for repeated assembly.' },
+  PETG:    { factor: 0.90, min: 0.86, max: 0.94, note: 'PETG is tougher and more flexible than PLA. A larger pilot (90%) helps prevent binding. Good for functional parts.' },
+  Nylon:   { factor: 0.93, min: 0.90, max: 0.97, note: 'Nylon is tough and flexible. Use a larger pilot hole (93%) — nylon compresses rather than shears, so tight holes can seize. Allow clearance for moisture expansion.' },
+  PC:      { factor: 0.87, min: 0.83, max: 0.91, note: 'Polycarbonate is strong but notch-sensitive. Stay at ~87% to prevent micro-cracking. Never exceed max torque, and pre-drill slowly.' },
+  Acrylic: { factor: 0.83, min: 0.80, max: 0.88, note: 'Acrylic (PMMA) is very brittle. Use the smallest recommended pilot and drill at low speed. Consider step-drilling and use machine screws with pre-drilled clearance holes.' },
 };
 
 let currentMat = 'ABS';
 let currentUnit = 'mm';
+let fdmEnabled = false;
 
-function populate() {
-  const sel = document.getElementById('screwSelect');
-  sel.innerHTML = '';
-  SCREWS.forEach((s, i) => {
-    const opt = document.createElement('option');
-    opt.value = i;
-    opt.textContent = s.label;
-    sel.appendChild(opt);
-  });
+function clamp(v, lo, hi) { return Math.max(lo, Math.min(hi, v)); }
+
+function getFdmFactor() {
+  const nom = parseFloat(document.getElementById('fdmNominal').value) || 1;
+  const act = parseFloat(document.getElementById('fdmActual').value) || 1;
+  if (nom <= 0) return 1;
+  return act / nom; // < 1 = printer prints smaller than modelled
 }
 
 function fmt(val) {
-  if (currentUnit === 'mm') return val.toFixed(2) + ' mm';
-  return (val / 25.4).toFixed(4) + '"';
+  return currentUnit === 'mm' ? val.toFixed(2) + ' mm' : (val / 25.4).toFixed(4) + '"';
 }
 
 function fmtShort(val) {
-  if (currentUnit === 'mm') return val.toFixed(2);
-  return (val / 25.4).toFixed(4);
+  return currentUnit === 'mm' ? val.toFixed(2) : (val / 25.4).toFixed(4);
+}
+
+function unitSuffix() { return currentUnit === 'mm' ? ' mm' : '"'; }
+
+function strengthLabel(pct) {
+  if (pct >= 90) return 'Excellent';
+  if (pct >= 75) return 'Good';
+  if (pct >= 60) return 'Adequate';
+  return 'Light';
 }
 
 function update() {
   const idx = parseInt(document.getElementById('screwSelect').value);
   const screw = SCREWS[idx];
   const mat = MATERIALS[currentMat];
+  const engPct = parseInt(document.getElementById('engSlider').value);
 
-  const pilot = screw.major * mat.factor;
+  // Minor (root) diameter using ISO 68-1 thread form
+  const pitch = screw.pitch;
+  const minorD = screw.major - 1.2269 * pitch;
+
+  // Interpolate pilot between major Ø (0% engagement) and minor Ø (100% engagement)
+  // At material factor's "standard" 75%, this should equal major * mat.factor
+  // So we solve: major * mat.factor = major - (major - minorD) * k * 0.75
+  // k = (major - major*mat.factor) / ((major - minorD) * 0.75) — material stiffness correction
+  const stdEngFrac = 0.75;
+  const stdPilot = screw.major * mat.factor;
+  const threadRange = screw.major - minorD;
+  const matK = (screw.major - stdPilot) / (threadRange * stdEngFrac);
+  const engFrac = engPct / 100;
+  let pilot = screw.major - threadRange * matK * engFrac;
+  pilot = clamp(pilot, minorD * 0.98, screw.major * 0.99);
+
   const minPilot = screw.major * mat.min;
   const maxPilot = screw.major * mat.max;
-  const clearance = screw.major * 1.05;
 
+  // Thread engagement metrics
+  const threadDepth = (screw.major - pilot) / 2;
+  const fullThreadDepth = threadRange / 2;
+  const actualEngPct = clamp((threadDepth / fullThreadDepth) * 100, 0, 100);
+  const recEngageLen = screw.major * 1.5;
+
+  // FDM
+  const fdmFactor = getFdmFactor();
+  const fdmAdjusted = pilot / fdmFactor;
+
+  // — Main results —
   document.getElementById('pilotVal').childNodes[0].textContent = fmtShort(pilot);
-  document.getElementById('pilotUnit').textContent = currentUnit === 'mm' ? ' mm' : '"';
+  document.getElementById('pilotUnit').textContent = unitSuffix();
   document.getElementById('majorVal').childNodes[0].textContent = fmtShort(screw.major);
-  document.getElementById('majorUnit').textContent = currentUnit === 'mm' ? ' mm' : '"';
+  document.getElementById('majorUnit').textContent = unitSuffix();
 
+  // FDM block
+  const fdmBlock = document.getElementById('fdmBlock');
+  fdmBlock.style.opacity = fdmEnabled ? '1' : '0.3';
+  if (fdmEnabled) {
+    document.getElementById('fdmAdjVal').childNodes[0].textContent = fmtShort(fdmAdjusted);
+    document.getElementById('fdmAdjUnit').textContent = unitSuffix();
+  } else {
+    document.getElementById('fdmAdjVal').childNodes[0].textContent = '—';
+    document.getElementById('fdmAdjUnit').textContent = '';
+  }
+
+  // Ranges
   document.getElementById('minVal').textContent = fmt(minPilot);
   document.getElementById('recVal').textContent = fmt(pilot);
   document.getElementById('maxVal').textContent = fmt(maxPilot);
 
-  const ratio = (mat.factor - 0.75) / (1.0 - 0.75);
-  document.getElementById('gaugeFill').style.width = (ratio * 100).toFixed(1) + '%';
+  // Gauge — shows tightness relative to screw major
+  const looseness = (screw.major - pilot) / threadRange;
+  document.getElementById('gaugeFill').style.width = clamp(looseness * 100, 5, 95).toFixed(1) + '%';
 
+  // Engagement box
+  document.getElementById('engDepth').textContent = fmt(threadDepth);
+  document.getElementById('engMinLen').textContent = fmt(recEngageLen);
+  document.getElementById('engStrength').textContent = strengthLabel(actualEngPct);
+  document.getElementById('engBar1').style.width = clamp(actualEngPct, 0, 100).toFixed(1) + '%';
+  document.getElementById('engBar2').style.width = '75%'; // visual constant for rec length
+  document.getElementById('engBar3').style.width = clamp(actualEngPct, 0, 100).toFixed(1) + '%';
+
+  // Notes
   document.getElementById('noteBox').innerHTML = `<strong>${currentMat}:</strong> ${mat.note}`;
+
+  // Update FDM inline display
+  document.getElementById('fdmFactor').textContent = fdmFactor.toFixed(4) + '×';
+  document.getElementById('fdmExample').textContent = fmt(pilot / fdmFactor);
 }
 
-// Mat buttons
+function populate() {
+  const sel = document.getElementById('screwSelect');
+  SCREWS.forEach((s, i) => {
+    const opt = document.createElement('option');
+    opt.value = i;
+    opt.textContent = s.label;
+    sel.appendChild(opt);
+  });
+  sel.value = 4; // default to M3.5 (user's example)
+}
+
+// Material buttons
 document.getElementById('matGrid').addEventListener('click', e => {
   const btn = e.target.closest('.mat-btn');
   if (!btn) return;
@@ -521,6 +829,26 @@ document.querySelectorAll('.unit-btn').forEach(btn => {
 });
 
 document.getElementById('screwSelect').addEventListener('change', update);
+
+document.getElementById('engSlider').addEventListener('input', () => {
+  document.getElementById('engPctDisplay').textContent = document.getElementById('engSlider').value + '%';
+  update();
+});
+
+document.getElementById('fdmToggle').addEventListener('change', function() {
+  fdmEnabled = this.checked;
+  const body = document.getElementById('fdmBody');
+  const lbl = document.getElementById('fdmToggleLabel');
+  body.classList.toggle('hidden', !fdmEnabled);
+  lbl.textContent = fdmEnabled
+    ? 'Enabled — scaling model Ø to compensate for shrinkage'
+    : 'Disabled — using nominal dimensions';
+  lbl.classList.toggle('on', fdmEnabled);
+  update();
+});
+
+document.getElementById('fdmNominal').addEventListener('input', update);
+document.getElementById('fdmActual').addEventListener('input', update);
 
 populate();
 update();
