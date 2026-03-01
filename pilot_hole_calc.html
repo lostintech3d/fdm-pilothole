@@ -4,19 +4,21 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Pilot Hole Calculator</title>
-<link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Barlow+Condensed:wght@300;400;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #0e1117;
-    --panel: #161b27;
-    --border: #2a3245;
-    --accent: #00e5ff;
-    --accent2: #ff6b35;
+    --bg: #05070f;
+    --panel: #0b0e1a;
+    --border: #1e2440;
+    --accent: #7c6ff7;
+    --accent-bright: #a89dff;
+    --accent2: #4fc8ff;
     --accent3: #a8ff3e;
-    --text: #c8d6e5;
-    --dim: #5a6a80;
-    --mono: 'Share Tech Mono', monospace;
-    --sans: 'Barlow Condensed', sans-serif;
+    --text: #dde3f5;
+    --dim: #7a85a8;
+    --display: 'Bebas Neue', sans-serif;
+    --sans: 'Inter', sans-serif;
+    --mono: 'Inter', sans-serif;
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -29,73 +31,80 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 40px 16px 60px;
+    padding: 40px 24px 60px;
     background-image:
-      linear-gradient(rgba(0,229,255,0.03) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(0,229,255,0.03) 1px, transparent 1px);
-    background-size: 40px 40px;
+      radial-gradient(ellipse at 20% 20%, rgba(124,111,247,0.07) 0%, transparent 60%),
+      radial-gradient(ellipse at 80% 80%, rgba(79,200,255,0.05) 0%, transparent 60%),
+      radial-gradient(circle, rgba(255,255,255,0.6) 1px, transparent 1px);
+    background-size: 100% 100%, 100% 100%, 200px 200px;
   }
 
-  header { text-align: center; margin-bottom: 40px; }
+  header { text-align: center; margin-bottom: 48px; }
 
   .title-tag {
-    font-family: var(--mono);
-    font-size: 11px;
+    font-family: var(--sans);
+    font-size: 13px;
+    font-weight: 600;
     color: var(--accent);
-    letter-spacing: 4px;
+    letter-spacing: 5px;
     text-transform: uppercase;
-    margin-bottom: 8px;
+    margin-bottom: 12px;
+    opacity: 0.8;
   }
 
   h1 {
-    font-size: clamp(2.5rem, 6vw, 4.5rem);
-    font-weight: 700;
-    letter-spacing: -1px;
-    line-height: 1;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(4rem, 12vw, 8rem);
+    font-weight: 400;
+    letter-spacing: 4px;
+    line-height: 0.9;
     color: #fff;
     text-transform: uppercase;
+    text-shadow: 0 0 60px rgba(124,111,247,0.5), 0 0 120px rgba(124,111,247,0.2);
   }
 
-  h1 span { color: var(--accent); }
+  h1 span { color: var(--accent-bright); }
 
   .subtitle {
-    margin-top: 10px;
-    font-size: 1rem;
+    margin-top: 14px;
+    font-size: 0.75rem;
+    font-weight: 500;
     color: var(--dim);
-    letter-spacing: 2px;
-    font-weight: 300;
+    letter-spacing: 4px;
     text-transform: uppercase;
   }
 
   .card {
     background: var(--panel);
     border: 1px solid var(--border);
-    border-radius: 4px;
+    border-radius: 8px;
     padding: 32px;
     width: 100%;
-    max-width: 720px;
     position: relative;
     overflow: hidden;
-    margin-bottom: 16px;
+    margin-bottom: 0;
+    box-shadow: 0 4px 40px rgba(0,0,0,0.5);
   }
 
   .card::before {
     content: '';
     position: absolute;
     top: 0; left: 0; right: 0;
-    height: 2px;
-    background: linear-gradient(90deg, var(--accent), var(--accent2));
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--accent), var(--accent2), transparent);
   }
 
-  .card.fdm-card::before { background: linear-gradient(90deg, var(--accent3), var(--accent)); }
+  .card.fdm-card::before { background: linear-gradient(90deg, transparent, var(--accent3), var(--accent), transparent); }
 
   .section-label {
-    font-family: var(--mono);
-    font-size: 12px;
-    letter-spacing: 3px;
+    font-family: var(--sans);
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 4px;
     color: var(--accent);
     text-transform: uppercase;
     margin-bottom: 16px;
+    opacity: 0.9;
   }
 
   .section-label.green { color: var(--accent3); }
@@ -112,23 +121,23 @@
     border: 1px solid var(--border);
     color: var(--dim);
     font-family: var(--sans);
-    font-size: 1rem;
+    font-size: 0.95rem;
     font-weight: 600;
     letter-spacing: 1px;
     text-transform: uppercase;
     padding: 12px 8px;
-    border-radius: 3px;
+    border-radius: 6px;
     cursor: pointer;
     transition: all 0.15s;
   }
 
-  .mat-btn:hover { border-color: var(--accent); color: var(--text); }
-  .mat-btn.active { border-color: var(--accent); color: var(--accent); background: rgba(0,229,255,0.07); }
+  .mat-btn:hover { border-color: var(--accent); color: var(--text); background: rgba(124,111,247,0.05); }
+  .mat-btn.active { border-color: var(--accent); color: var(--accent-bright); background: rgba(124,111,247,0.12); box-shadow: 0 0 16px rgba(124,111,247,0.2); }
 
   .mat-btn .mat-temp {
     display: block;
-    font-family: var(--mono);
-    font-size: 9px;
+    font-family: var(--sans);
+    font-size: 12px;
     font-weight: 400;
     letter-spacing: 1px;
     color: var(--dim);
@@ -148,8 +157,9 @@
 
   label {
     display: block;
-    font-family: var(--mono);
-    font-size: 11px;
+    font-family: var(--sans);
+    font-size: 13px;
+    font-weight: 600;
     letter-spacing: 3px;
     color: var(--dim);
     text-transform: uppercase;
@@ -158,27 +168,29 @@
 
   select, input[type=number] {
     width: 100%;
-    background: var(--bg);
+    background: rgba(0,0,0,0.3);
     border: 1px solid var(--border);
     color: var(--text);
-    font-family: var(--mono);
+    font-family: var(--sans);
     font-size: 16px;
+    font-weight: 500;
     padding: 11px 12px;
-    border-radius: 3px;
+    border-radius: 6px;
     cursor: pointer;
   }
 
   select {
     appearance: none;
     -webkit-appearance: none;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%235a6a80' d='M6 8L0 0h12z'/%3E%3C/svg%3E");
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%234a5275' d='M6 8L0 0h12z'/%3E%3C/svg%3E");
     background-repeat: no-repeat;
     background-position: right 14px center;
+    background-color: rgba(0,0,0,0.3);
   }
 
   input[type=number] { appearance: textfield; -moz-appearance: textfield; }
   input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; }
-  select:focus, input[type=number]:focus { outline: none; border-color: var(--accent); }
+  select:focus, input[type=number]:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 2px rgba(124,111,247,0.15); }
 
   .unit-toggle { display: flex; gap: 4px; }
 
@@ -187,20 +199,22 @@
     background: transparent;
     border: 1px solid var(--border);
     color: var(--dim);
-    font-family: var(--mono);
+    font-family: var(--sans);
     font-size: 15px;
+    font-weight: 600;
     padding: 10px;
-    border-radius: 3px;
+    border-radius: 6px;
     cursor: pointer;
     transition: all 0.15s;
   }
 
-  .unit-btn.active { background: rgba(0,229,255,0.1); border-color: var(--accent); color: var(--accent); }
+  .unit-btn.active { background: rgba(124,111,247,0.12); border-color: var(--accent); color: var(--accent-bright); box-shadow: 0 0 12px rgba(124,111,247,0.2); }
 
   .slider-value {
-    font-family: var(--mono);
+    font-family: var(--sans);
     font-size: 15px;
-    color: var(--accent);
+    font-weight: 700;
+    color: var(--accent-bright);
   }
 
   input[type=range] {
@@ -221,7 +235,7 @@
     border-radius: 50%;
     background: var(--accent);
     cursor: pointer;
-    box-shadow: 0 0 8px rgba(0,229,255,0.5);
+    box-shadow: 0 0 12px rgba(124,111,247,0.7);
   }
 
   input[type=range]::-moz-range-thumb {
@@ -235,8 +249,8 @@
   .slider-labels {
     display: flex;
     justify-content: space-between;
-    font-family: var(--mono);
-    font-size: 11px;
+    font-family: var(--sans);
+    font-size: 13px;
     color: var(--dim);
     margin-top: 5px;
   }
@@ -275,8 +289,8 @@
   .toggle-switch input:checked + .toggle-track + .toggle-thumb { transform: translateX(20px); background: var(--accent3); }
 
   .toggle-label {
-    font-family: var(--mono);
-    font-size: 11px;
+    font-family: var(--sans);
+    font-size: 13px;
     letter-spacing: 2px;
     color: var(--dim);
     text-transform: uppercase;
@@ -302,13 +316,13 @@
     background: var(--bg);
     border: 1px solid rgba(168,255,62,0.3);
     border-radius: 3px;
-    font-family: var(--mono);
+    font-family: var(--sans);
     font-size: 15px;
     color: var(--accent3);
   }
 
   .fdm-result-inline .fdm-label {
-    font-size: 9px;
+    font-size: 12px;
     letter-spacing: 2px;
     color: var(--dim);
     display: block;
@@ -317,8 +331,8 @@
   }
 
   .fdm-hint {
-    font-family: var(--mono);
-    font-size: 10px;
+    font-family: var(--sans);
+    font-size: 12px;
     color: var(--dim);
     letter-spacing: 1px;
     line-height: 1.8;
@@ -340,9 +354,9 @@
     text-align: center;
     padding: 28px 20px 24px;
     margin-bottom: 24px;
-    border: 1px solid rgba(0,229,255,0.25);
+    border: 1px solid rgba(124,111,247,0.3);
     border-radius: 4px;
-    background: rgba(0,229,255,0.04);
+    background: rgba(124,111,247,0.05);
     position: relative;
     overflow: hidden;
   }
@@ -356,8 +370,8 @@
   }
 
   .pilot-hero .ph-label {
-    font-family: var(--mono);
-    font-size: 11px;
+    font-family: var(--sans);
+    font-size: 13px;
     letter-spacing: 4px;
     color: var(--accent);
     text-transform: uppercase;
@@ -366,32 +380,34 @@
   }
 
   .pilot-hero .ph-value {
-    font-family: var(--mono);
-    font-size: clamp(3rem, 10vw, 5.5rem);
-    color: var(--accent);
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(4rem, 14vw, 7rem);
+    color: #fff;
     line-height: 1;
-    letter-spacing: -2px;
-    text-shadow: 0 0 40px rgba(0,229,255,0.3);
+    letter-spacing: 4px;
+    text-shadow: 0 0 60px rgba(124,111,247,0.5), 0 0 120px rgba(124,111,247,0.2);
   }
 
   .pilot-hero .ph-unit {
-    font-size: clamp(1.2rem, 3vw, 1.8rem);
-    letter-spacing: 0;
-    margin-left: 6px;
-    opacity: 0.6;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(1.5rem, 4vw, 2.2rem);
+    letter-spacing: 2px;
+    margin-left: 8px;
+    opacity: 0.5;
   }
 
   .pilot-hero .ph-note {
-    font-family: var(--mono);
-    font-size: 11px;
+    font-family: var(--sans);
+    font-size: 12px;
+    font-weight: 500;
     color: var(--accent3);
     letter-spacing: 2px;
-    margin-top: 4px;
-    min-height: 18px;
+    margin-top: 6px;
+    min-height: 20px;
   }
 
   .pilot-hero.fdm-hero {
-    border-color: rgba(168,255,62,0.35);
+    border-color: rgba(168,255,62,0.3);
     background: rgba(168,255,62,0.04);
   }
 
@@ -400,18 +416,19 @@
   }
 
   .pilot-hero.fdm-hero .ph-label { color: var(--accent3); }
-  .pilot-hero.fdm-hero .ph-value { color: var(--accent3); text-shadow: 0 0 40px rgba(168,255,62,0.3); }
-  .pilot-hero.fdm-hero .ph-unit { color: var(--accent3); }
+  .pilot-hero.fdm-hero .ph-value { color: #fff; text-shadow: 0 0 60px rgba(168,255,62,0.4), 0 0 120px rgba(168,255,62,0.15); }
+  .pilot-hero.fdm-hero .ph-unit { color: var(--accent3); opacity: 0.7; }
 
   .pilot-hero .ph-sub {
-    margin-top: 10px;
-    font-family: var(--mono);
+    margin-top: 12px;
+    font-family: var(--sans);
     font-size: 12px;
+    font-weight: 400;
     color: var(--dim);
-    letter-spacing: 2px;
+    letter-spacing: 1px;
   }
 
-  .pilot-hero .ph-sub span { color: var(--text); }
+  .pilot-hero .ph-sub span { color: var(--text); font-weight: 500; }
 
   .result-main {
     display: grid;
@@ -423,8 +440,9 @@
   @media (max-width: 480px) { .result-main { grid-template-columns: 1fr; } }
 
   .result-block .rl {
-    font-family: var(--mono);
-    font-size: 10px;
+    font-family: var(--sans);
+    font-size: 12px;
+    font-weight: 600;
     letter-spacing: 3px;
     color: var(--dim);
     text-transform: uppercase;
@@ -432,19 +450,20 @@
   }
 
   .result-block .rv {
-    font-family: var(--mono);
-    font-size: 2.2rem;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2.6rem;
+    letter-spacing: 2px;
     color: #fff;
     line-height: 1;
   }
 
-  .result-block .rv span { font-size: 1rem; color: var(--accent); margin-left: 3px; }
-  .result-block.accent .rv { color: var(--accent); }
+  .result-block .rv span { font-family: var(--sans); font-size: 1rem; font-weight: 500; color: var(--accent); margin-left: 3px; }
+  .result-block.accent .rv { color: var(--accent-bright); }
   .result-block.green .rv { color: var(--accent3); }
 
   .fdm-compensation-tag {
     display: inline-block;
-    font-family: var(--mono);
+    font-family: var(--sans);
     font-size: 8px;
     letter-spacing: 1px;
     text-transform: uppercase;
@@ -481,21 +500,24 @@
 
   .stat-cell {
     text-align: center;
-    padding: 12px 8px;
+    padding: 14px 8px;
     border: 1px solid var(--border);
-    border-radius: 3px;
+    border-radius: 6px;
+    background: rgba(0,0,0,0.2);
   }
 
   .stat-cell .sv {
-    font-family: var(--mono);
-    font-size: 1.2rem;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.5rem;
+    letter-spacing: 1px;
     color: var(--text);
     display: block;
   }
 
   .stat-cell .sl {
-    font-family: var(--mono);
-    font-size: 11px;
+    font-family: var(--sans);
+    font-size: 12px;
+    font-weight: 600;
     letter-spacing: 2px;
     color: var(--dim);
     text-transform: uppercase;
@@ -505,15 +527,16 @@
 
   .engagement-box {
     border: 1px solid rgba(168,255,62,0.2);
-    border-radius: 3px;
+    border-radius: 6px;
     padding: 16px 20px;
     margin-bottom: 20px;
     background: rgba(168,255,62,0.02);
   }
 
   .engagement-box .eb-label {
-    font-family: var(--mono);
-    font-size: 11px;
+    font-family: var(--sans);
+    font-size: 12px;
+    font-weight: 600;
     letter-spacing: 3px;
     color: var(--accent3);
     text-transform: uppercase;
@@ -529,15 +552,17 @@
   .eng-cell { text-align: center; }
 
   .eng-cell .ev {
-    font-family: var(--mono);
-    font-size: 1.2rem;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.4rem;
+    letter-spacing: 1px;
     color: var(--accent3);
     display: block;
   }
 
   .eng-cell .el {
-    font-family: var(--mono);
-    font-size: 11px;
+    font-family: var(--sans);
+    font-size: 12px;
+    font-weight: 600;
     letter-spacing: 1px;
     color: var(--dim);
     text-transform: uppercase;
@@ -562,34 +587,72 @@
 
   .note-box {
     padding: 14px 16px;
-    border-left: 2px solid var(--accent2);
-    background: rgba(255,107,53,0.05);
-    font-size: 1rem;
+    border-left: 2px solid rgba(124,111,247,0.5);
+    background: rgba(124,111,247,0.05);
+    font-family: var(--sans);
+    font-size: 0.95rem;
     color: var(--dim);
     line-height: 1.7;
+    border-radius: 0 4px 4px 0;
   }
 
-  .note-box strong { color: var(--accent2); }
+  .note-box strong { color: var(--accent-bright); }
 
   footer {
     margin-top: 16px;
-    font-family: var(--mono);
-    font-size: 11px;
+    font-family: var(--sans);
+    font-size: 13px;
     color: var(--dim);
     letter-spacing: 1px;
     text-align: center;
     max-width: 720px;
     line-height: 2;
   }
+
+  /* ── Two-column layout ── */
+  .page-layout {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    width: 100%;
+    max-width: 1200px;
+  }
+
+  .col-inputs {
+    flex: 1 1 480px;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .col-results {
+    flex: 0 0 360px;
+    position: sticky;
+    top: 24px;
+  }
+
+  .col-results .card {
+    margin-bottom: 0;
+  }
+
+  @media (max-width: 860px) {
+    .page-layout { flex-direction: column; }
+    .col-results { position: static; flex: none; width: 100%; }
+  }
 </style>
 </head>
 <body>
 
 <header>
-  <div class="title-tag">// tool v2.0</div>
-  <h1>3D Printing Screw Pilot Hole<br><span>Calculator</span></h1>
-  <div class="subtitle">For Special Plastic Screws · FDM Compensation · Thread Engagement</div>
+  <div class="title-tag">Pilot Hole · Calculator</div>
+  <h1><span>Holes</span></h1>
+  <div class="subtitle">3D Printing Plastic Screw Size Guide with Compensation and Engagement</div>
 </header>
+
+<div class="page-layout">
+  <!-- LEFT: Inputs -->
+  <div class="col-inputs">
 
 <!-- Card 1: Material + Screw + Engagement -->
 <div class="card">
@@ -599,7 +662,7 @@
     <button class="mat-btn" data-mat="PLA">PLA<span class="mat-temp">~60°C HDT</span></button>
     <button class="mat-btn" data-mat="PETG">PETG<span class="mat-temp">~80°C HDT</span></button>
     <button class="mat-btn" data-mat="Nylon">Nylon<span class="mat-temp">~80°C HDT</span></button>
-    <button class="mat-btn" data-mat="PC">Polycarbonate<span class="mat-temp">~130°C HDT</span></button>
+    <button class="mat-btn" data-mat="PC">PC<span class="mat-temp">Polycarbonate</span></button>
     <button class="mat-btn" data-mat="Resin">Resin / Hard<span class="mat-temp">brittle cast</span></button>
   </div>
 
@@ -667,7 +730,10 @@
   </div>
 </div>
 
-<!-- Card 3: Results -->
+  </div><!-- /col-inputs -->
+
+  <!-- RIGHT: Results (sticky) -->
+  <div class="col-results">
 <div class="card">
   <div class="result-panel">
     <div class="section-label">04 // Results</div>
@@ -733,6 +799,8 @@
     <div class="note-box" id="noteBox"></div>
   </div>
 </div>
+  </div><!-- /col-results -->
+</div><!-- /page-layout -->
 
 <footer>
   Target pilot Ø = major Ø × material factor × engagement correction &nbsp;·&nbsp;
