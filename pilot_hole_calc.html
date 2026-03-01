@@ -764,12 +764,12 @@ const SCREWS = [
 ];
 
 const MATERIALS = {
-  ABS:     { factor: 0.88, min: 0.84, max: 0.92, note: 'ABS is semi-rigid. Use ~88% of major diameter for good thread engagement without cracking. Drill slowly and clear chips frequently.' },
-  PLA:     { factor: 0.85, min: 0.82, max: 0.90, note: 'PLA is brittle. Use a slightly smaller pilot hole (85%) but avoid over-torquing — PLA cracks easily. Consider heat-set inserts for repeated assembly.' },
-  PETG:    { factor: 0.90, min: 0.86, max: 0.94, note: 'PETG is tougher and more flexible than PLA. A larger pilot (90%) helps prevent binding. Good for functional parts.' },
-  Nylon:   { factor: 0.93, min: 0.90, max: 0.97, note: 'Nylon is tough and flexible. Use a larger pilot hole (93%) — nylon compresses rather than shears, so tight holes can seize. Allow clearance for moisture expansion.' },
-  PC:      { factor: 0.87, min: 0.83, max: 0.91, note: 'Polycarbonate is strong but notch-sensitive. Stay at ~87% to prevent micro-cracking. Never exceed max torque, and pre-drill slowly.' },
-  Resin:   { factor: 0.82, min: 0.78, max: 0.87, note: 'Cast resin and hard plastics (PMMA, epoxy, SLA/DLP resin) are very brittle with low impact resistance. Use the smallest recommended pilot, drill at low speed, and avoid any lateral force. Step-drilling is recommended for larger holes. Pre-drilled clearance holes with machine screws are preferred over self-tapping for repeated assembly.' },
+  ABS:     { factor: 0.88, min: 0.84, max: 0.92, note: 'ABS is semi-rigid with decent ductility. ~88% of major diameter gives good thread engagement. Drill slowly and clear chips frequently.' },
+  PLA:     { factor: 0.91, min: 0.88, max: 0.94, note: 'PLA is more brittle than ABS despite being commonly used. A larger pilot (91%) reduces cracking risk. Avoid overtorquing — PLA shatters rather than deforming. Heat-set inserts are strongly recommended for any repeated assembly.' },
+  PETG:    { factor: 0.86, min: 0.83, max: 0.90, note: 'PETG is tougher and more flexible than both PLA and ABS, so it can handle a tighter pilot hole. Good thread-forming characteristics for functional parts.' },
+  Nylon:   { factor: 0.83, min: 0.80, max: 0.87, note: 'Nylon is the toughest and most ductile common FDM material — it compresses and deforms rather than cracking, so a tighter pilot is fine. Allow extra clearance if moisture absorption is a concern, as nylon expands slightly when wet.' },
+  PC:      { factor: 0.90, min: 0.86, max: 0.93, note: 'Polycarbonate is very strong but notch-sensitive and can crack under localised stress. A larger pilot (~90%) reduces stress concentration. Drill slowly and never overtorque.' },
+  Resin:   { factor: 0.96, min: 0.93, max: 1.00, note: 'Cast resin and hard plastics (PMMA, epoxy, SLA/DLP resin) are very brittle — use a large pilot hole (96%+ of major diameter) to minimise cutting force and prevent cracking. A clearance-fit hole with a nut or heat-set insert is strongly preferred over self-tapping. If you must self-tap, go slowly, back the screw out frequently, and never overtorque.' },
 };
 
 let currentMat = 'ABS';
