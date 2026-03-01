@@ -91,7 +91,7 @@
 
   .section-label {
     font-family: var(--mono);
-    font-size: 10px;
+    font-size: 12px;
     letter-spacing: 3px;
     color: var(--accent);
     text-transform: uppercase;
@@ -149,7 +149,7 @@
   label {
     display: block;
     font-family: var(--mono);
-    font-size: 10px;
+    font-size: 11px;
     letter-spacing: 3px;
     color: var(--dim);
     text-transform: uppercase;
@@ -162,8 +162,8 @@
     border: 1px solid var(--border);
     color: var(--text);
     font-family: var(--mono);
-    font-size: 14px;
-    padding: 10px 12px;
+    font-size: 16px;
+    padding: 11px 12px;
     border-radius: 3px;
     cursor: pointer;
   }
@@ -188,7 +188,7 @@
     border: 1px solid var(--border);
     color: var(--dim);
     font-family: var(--mono);
-    font-size: 13px;
+    font-size: 15px;
     padding: 10px;
     border-radius: 3px;
     cursor: pointer;
@@ -236,7 +236,7 @@
     display: flex;
     justify-content: space-between;
     font-family: var(--mono);
-    font-size: 9px;
+    font-size: 11px;
     color: var(--dim);
     margin-top: 5px;
   }
@@ -335,18 +335,96 @@
     margin-top: 8px;
   }
 
+  /* Hero pilot hole display */
+  .pilot-hero {
+    text-align: center;
+    padding: 28px 20px 24px;
+    margin-bottom: 24px;
+    border: 1px solid rgba(0,229,255,0.25);
+    border-radius: 4px;
+    background: rgba(0,229,255,0.04);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .pilot-hero::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--accent), transparent);
+  }
+
+  .pilot-hero .ph-label {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 4px;
+    color: var(--accent);
+    text-transform: uppercase;
+    opacity: 0.7;
+    margin-bottom: 10px;
+  }
+
+  .pilot-hero .ph-value {
+    font-family: var(--mono);
+    font-size: clamp(3rem, 10vw, 5.5rem);
+    color: var(--accent);
+    line-height: 1;
+    letter-spacing: -2px;
+    text-shadow: 0 0 40px rgba(0,229,255,0.3);
+  }
+
+  .pilot-hero .ph-unit {
+    font-size: clamp(1.2rem, 3vw, 1.8rem);
+    letter-spacing: 0;
+    margin-left: 6px;
+    opacity: 0.6;
+  }
+
+  .pilot-hero .ph-note {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--accent3);
+    letter-spacing: 2px;
+    margin-top: 4px;
+    min-height: 18px;
+  }
+
+  .pilot-hero.fdm-hero {
+    border-color: rgba(168,255,62,0.35);
+    background: rgba(168,255,62,0.04);
+  }
+
+  .pilot-hero.fdm-hero::before {
+    background: linear-gradient(90deg, transparent, var(--accent3), transparent);
+  }
+
+  .pilot-hero.fdm-hero .ph-label { color: var(--accent3); }
+  .pilot-hero.fdm-hero .ph-value { color: var(--accent3); text-shadow: 0 0 40px rgba(168,255,62,0.3); }
+  .pilot-hero.fdm-hero .ph-unit { color: var(--accent3); }
+
+  .pilot-hero .ph-sub {
+    margin-top: 10px;
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--dim);
+    letter-spacing: 2px;
+  }
+
+  .pilot-hero .ph-sub span { color: var(--text); }
+
   .result-main {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(2, 1fr);
     gap: 16px;
     margin-bottom: 24px;
   }
 
-  @media (max-width: 480px) { .result-main { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 480px) { .result-main { grid-template-columns: 1fr; } }
 
   .result-block .rl {
     font-family: var(--mono);
-    font-size: 9px;
+    font-size: 10px;
     letter-spacing: 3px;
     color: var(--dim);
     text-transform: uppercase;
@@ -355,12 +433,12 @@
 
   .result-block .rv {
     font-family: var(--mono);
-    font-size: 1.95rem;
+    font-size: 2.2rem;
     color: #fff;
     line-height: 1;
   }
 
-  .result-block .rv span { font-size: 0.85rem; color: var(--accent); margin-left: 3px; }
+  .result-block .rv span { font-size: 1rem; color: var(--accent); margin-left: 3px; }
   .result-block.accent .rv { color: var(--accent); }
   .result-block.green .rv { color: var(--accent3); }
 
@@ -410,14 +488,14 @@
 
   .stat-cell .sv {
     font-family: var(--mono);
-    font-size: 1.05rem;
+    font-size: 1.2rem;
     color: var(--text);
     display: block;
   }
 
   .stat-cell .sl {
     font-family: var(--mono);
-    font-size: 9px;
+    font-size: 11px;
     letter-spacing: 2px;
     color: var(--dim);
     text-transform: uppercase;
@@ -435,7 +513,7 @@
 
   .engagement-box .eb-label {
     font-family: var(--mono);
-    font-size: 9px;
+    font-size: 11px;
     letter-spacing: 3px;
     color: var(--accent3);
     text-transform: uppercase;
@@ -459,7 +537,7 @@
 
   .eng-cell .el {
     font-family: var(--mono);
-    font-size: 9px;
+    font-size: 11px;
     letter-spacing: 1px;
     color: var(--dim);
     text-transform: uppercase;
@@ -486,9 +564,9 @@
     padding: 14px 16px;
     border-left: 2px solid var(--accent2);
     background: rgba(255,107,53,0.05);
-    font-size: 0.9rem;
+    font-size: 1rem;
     color: var(--dim);
-    line-height: 1.6;
+    line-height: 1.7;
   }
 
   .note-box strong { color: var(--accent2); }
@@ -496,7 +574,7 @@
   footer {
     margin-top: 16px;
     font-family: var(--mono);
-    font-size: 10px;
+    font-size: 11px;
     color: var(--dim);
     letter-spacing: 1px;
     text-align: center;
@@ -522,7 +600,7 @@
     <button class="mat-btn" data-mat="PETG">PETG<span class="mat-temp">~80°C HDT</span></button>
     <button class="mat-btn" data-mat="Nylon">Nylon<span class="mat-temp">~80°C HDT</span></button>
     <button class="mat-btn" data-mat="PC">Polycarbonate<span class="mat-temp">~130°C HDT</span></button>
-    <button class="mat-btn" data-mat="Acrylic">Acrylic<span class="mat-temp">~95°C HDT</span></button>
+    <button class="mat-btn" data-mat="Resin">Resin / Hard<span class="mat-temp">brittle cast</span></button>
   </div>
 
   <div class="controls-row">
@@ -594,11 +672,15 @@
   <div class="result-panel">
     <div class="section-label">04 // Results</div>
 
+    <!-- Hero: recommended pilot hole -->
+    <div class="pilot-hero" id="pilotHero">
+      <div class="ph-label" id="heroLabel">Recommended Pilot Hole</div>
+      <div class="ph-value" id="pilotVal">—<span class="ph-unit" id="pilotUnit">mm</span></div>
+      <div class="ph-note" id="heroNote"></div>
+      <div class="ph-sub" id="pilotSubtitle">select a screw size above</div>
+    </div>
+
     <div class="result-main">
-      <div class="result-block accent">
-        <div class="rl">Target Pilot Ø</div>
-        <div class="rv" id="pilotVal">—<span id="pilotUnit">mm</span></div>
-      </div>
       <div class="result-block green" id="fdmBlock" style="opacity:0.3">
         <div class="rl">Model at Ø <span class="fdm-compensation-tag">FDM</span></div>
         <div class="rv" id="fdmAdjVal">—<span id="fdmAdjUnit">mm</span></div>
@@ -687,7 +769,7 @@ const MATERIALS = {
   PETG:    { factor: 0.90, min: 0.86, max: 0.94, note: 'PETG is tougher and more flexible than PLA. A larger pilot (90%) helps prevent binding. Good for functional parts.' },
   Nylon:   { factor: 0.93, min: 0.90, max: 0.97, note: 'Nylon is tough and flexible. Use a larger pilot hole (93%) — nylon compresses rather than shears, so tight holes can seize. Allow clearance for moisture expansion.' },
   PC:      { factor: 0.87, min: 0.83, max: 0.91, note: 'Polycarbonate is strong but notch-sensitive. Stay at ~87% to prevent micro-cracking. Never exceed max torque, and pre-drill slowly.' },
-  Acrylic: { factor: 0.83, min: 0.80, max: 0.88, note: 'Acrylic (PMMA) is very brittle. Use the smallest recommended pilot and drill at low speed. Consider step-drilling and use machine screws with pre-drilled clearance holes.' },
+  Resin:   { factor: 0.82, min: 0.78, max: 0.87, note: 'Cast resin and hard plastics (PMMA, epoxy, SLA/DLP resin) are very brittle with low impact resistance. Use the smallest recommended pilot, drill at low speed, and avoid any lateral force. Step-drilling is recommended for larger holes. Pre-drilled clearance holes with machine screws are preferred over self-tapping for repeated assembly.' },
 };
 
 let currentMat = 'ABS';
@@ -758,18 +840,43 @@ function update() {
   // — Main results —
   document.getElementById('pilotVal').childNodes[0].textContent = fmtShort(pilot);
   document.getElementById('pilotUnit').textContent = unitSuffix();
+  document.getElementById('pilotSubtitle').innerHTML =
+    `<span>${currentMat}</span> · <span>${SCREWS[idx].label}</span> · engagement <span>${engPct}%</span>`;
   document.getElementById('majorVal').childNodes[0].textContent = fmtShort(screw.major);
   document.getElementById('majorUnit').textContent = unitSuffix();
 
-  // FDM block
+  // FDM block + hero swap
   const fdmBlock = document.getElementById('fdmBlock');
   fdmBlock.style.opacity = fdmEnabled ? '1' : '0.3';
   if (fdmEnabled) {
     document.getElementById('fdmAdjVal').childNodes[0].textContent = fmtShort(fdmAdjusted);
     document.getElementById('fdmAdjUnit').textContent = unitSuffix();
+    // Hero shows FDM model size
+    document.getElementById('pilotVal').childNodes[0].textContent = fmtShort(fdmAdjusted);
+    document.getElementById('pilotUnit').textContent = unitSuffix();
+    document.getElementById('heroLabel').textContent = 'Model at Ø (FDM Compensated)';
+    document.getElementById('heroNote').textContent = '← use this in your CAD / slicer';
+    document.getElementById('pilotSubtitle').innerHTML =
+      `target pilot <span>${fmt(pilot)}</span> · shrinkage factor <span>${fdmFactor.toFixed(4)}×</span>`;
+    document.getElementById('pilotHero').classList.add('fdm-hero');
+    // Secondary block shows the underlying target
+    document.getElementById('fdmBlock').querySelector('.rl').innerHTML = 'Target Pilot Ø';
+    document.getElementById('fdmAdjVal').childNodes[0].textContent = fmtShort(pilot);
+    document.getElementById('fdmAdjUnit').textContent = unitSuffix();
+    document.getElementById('fdmBlock').style.opacity = '1';
   } else {
     document.getElementById('fdmAdjVal').childNodes[0].textContent = '—';
     document.getElementById('fdmAdjUnit').textContent = '';
+    // Hero shows target pilot
+    document.getElementById('pilotVal').childNodes[0].textContent = fmtShort(pilot);
+    document.getElementById('pilotUnit').textContent = unitSuffix();
+    document.getElementById('heroLabel').textContent = 'Recommended Pilot Hole';
+    document.getElementById('heroNote').textContent = '';
+    document.getElementById('pilotSubtitle').innerHTML =
+      `<span>${currentMat}</span> · <span>${SCREWS[idx].label}</span> · engagement <span>${engPct}%</span>`;
+    document.getElementById('pilotHero').classList.remove('fdm-hero');
+    document.getElementById('fdmBlock').querySelector('.rl').innerHTML = 'Model at Ø <span class="fdm-compensation-tag">FDM</span>';
+    document.getElementById('fdmBlock').style.opacity = '0.3';
   }
 
   // Ranges
